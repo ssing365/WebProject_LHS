@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    
+
 	<link rel="icon" href="img/logo/clapper.png"/> 
     <title>Spoiler Page - 영화를 즐기는 사람들</title>
 
@@ -42,7 +42,7 @@
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-
+                          
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
                 <a class="nav-link" href="#">
@@ -204,8 +204,8 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">자유게시판</h1>
-                    <p class="mb-4"> 영화에 대한 자유로운 이야기를 나누는 공간입니다.</p>
+                    <h1 class="h3 mb-2 text-gray-800">정보 공유 게시판</h1>
+                    <p class="mb-4"> 사람들에게 콘텐츠에 대한 양질의 정보를 제공해보세요.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -723,7 +723,7 @@
                 <div class="modal-body">
                     <h5 class="modal-title" id="exampleModalLabel">로그아웃 하시겠습니까?</h5>
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.kosmo">Logout</a>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>
