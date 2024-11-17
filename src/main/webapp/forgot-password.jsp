@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,20 +11,24 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Forgot Password</title>
+	<link rel="icon" href="img/logo/clapper.png"/> 
+    <title>Spoiler Page - 비밀번호 찾기</title>
 
     <!-- Custom fonts for this template-->
     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
-
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
 <body class="bg-gradient-primary">
+<% 
+out.println("JSP로 변경하기");
+%>
+서블릿 매핑 확인 : ${requestScope.message}
 
     <div class="container">
 
@@ -49,16 +55,16 @@
                                                 id="exampleInputEmail" aria-describedby="emailHelp"
                                                 placeholder="Enter Email Address...">
                                         </div>
-                                        <a href="login.html" class="btn btn-primary btn-user btn-block">
+                                        <a href="login.kosmo" class="btn btn-primary btn-user btn-block">
                                             Reset Password
                                         </a>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
+                                        <a class="small" href="register.kosmo">Create an Account!</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="login.html">Already have an account? Login!</a>
+                                        <a class="small" href="login.kosmo">Already have an account? Login!</a>
                                     </div>
                                 </div>
                             </div>
@@ -71,6 +77,9 @@
         </div>
 
     </div>
+    
+    <!-- Font Awesome  -->
+    <script src="https://kit.fontawesome.com/d1e91e0615.js" crossorigin="anonymous"></script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="vendor/jquery/jquery.min.js"></script>

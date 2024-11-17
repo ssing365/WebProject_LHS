@@ -45,7 +45,7 @@
                           
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="index.kosmo">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>자유게시판</span>
                 </a>
@@ -723,7 +723,7 @@
                 <div class="modal-body">
                     <h5 class="modal-title" id="exampleModalLabel">로그아웃 하시겠습니까?</h5>
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="login.jsp">Logout</a>
                 </div>
             </div>
         </div>
