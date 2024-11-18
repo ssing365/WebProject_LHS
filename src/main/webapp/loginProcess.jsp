@@ -1,0 +1,29 @@
+<%@page import="auth.MemberDAO"%>
+<%@page import="auth.MemberDTO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+String userId = request.getParameter("user_id");
+String userPwd = request.getParameter("user_pw");
+
+MemberDAO dao = new MemberDAO();
+MemberDTO memberDTO = dao.getMemberDTO(userId, userPwd);
+dao.close();
+
+//만약 DTO객체에 아이디가 저장되어 있다면 로그인에 성공한 것으로 판단
+if (memberDTO.getId() != null) {
+	//세션 영역에 아이디와 이름을 저장한다.
+	session.setAttribute("UserId", memberDTO.getId());
+	session.setAttribute("UserName", memberDTO.getName());
+	/*세션 영역에 저장된 속성값은 페이지를 이동하더라도 유지되므로 로그인페이지로 이동
+	그리고 웹브라우저를 완전히 닫을때까지 저장된 정보는 유지된다.*/
+	response.sendRedirect("index.kosmo");
+} else {
+	/*
+	로그인에 실패한 경우에는 request영역에 에러메시지를 저장한 후 로그인페이지로 포워드한다.
+	request영역은 포워드한 페이지까지 데이터를 공유한다.*/
+	
+	request.setAttribute("LoginErrMsg", "아이디 또는 비밀번호를 확인해주세요.");
+	request.getRequestDispatcher("login.jsp").forward(request, response);
+}
+%>

@@ -25,10 +25,6 @@
 </head>
 
 <body class="bg-gradient-primary">
-<% 
-out.println("JSP로 변경하기");
-%>
-서블릿 매핑 확인 : ${requestScope.message}
 
     <div class="container">
 

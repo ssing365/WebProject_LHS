@@ -26,10 +26,6 @@
 </head>
 
 <body class="bg-gradient-primary">
-<% 
-out.println("JSP로 변경하기");
-%>
-서블릿 매핑 확인 : ${requestScope.message}
 
     <div class="container">
 
@@ -41,43 +37,44 @@ out.println("JSP로 변경하기");
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                                <h1 class="h4 text-gray-900 mb-4">Welcome to Spoiler Page!</h1>
                             </div>
                             <form class="user">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="First Name">
+                                            placeholder="아이디">
+                                        <button>중복확인</button>
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="Last Name">
+                                            placeholder="닉네임">
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email Address">
+                                        placeholder="이메일">
                                 </div>
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
+                                            id="exampleInputPassword" placeholder="비밀번호">
                                     </div>
                                     <div class="col-sm-6">
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password">
+                                            id="exampleRepeatPassword" placeholder="비밀번호 재입력">
                                     </div>
                                 </div>
                                 <a href="login.kosmo" class="btn btn-primary btn-user btn-block">
-                                    Register Account
+                                    회원가입
                                 </a>
                             </form>
                             <hr>
                             <div class="text-center">
-                                <a class="small" href="forgot-password.kosmo">Forgot Password?</a>
+                                <a class="small" href="forgot-password.kosmo">비밀번호를 잊으셨나요?</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="login.kosmo">Already have an account? Login!</a>
+                                <a class="small" href="login.kosmo">계정이 이미 있으신가요? 로그인하기</a>
                             </div>
                         </div>
                     </div>
