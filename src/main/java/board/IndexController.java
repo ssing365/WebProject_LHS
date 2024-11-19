@@ -21,7 +21,7 @@ public class IndexController extends HttpServlet{
 				throws ServletException, IOException {
 			
 			//DAO 인스턴스 생성. 생성과 동시에 DBCP를 통해 오라클에 연결된다.
-			BoardDAO dao = new BoardDAO();
+			FreeBoardDAO dao = new FreeBoardDAO();
 			
 			//검색어 관련 파라미터 저장을 위해 Map 생성. 뷰에 전달할 매개변수 저장용 맵 생성
 			Map<String, Object> map = new HashMap<String, Object>();
@@ -41,7 +41,7 @@ public class IndexController extends HttpServlet{
 			map.put("totalCount", totalCount);
 			
 			//목록에 출력할 레코드를 인출하기 위한 메서드 호출
-			List<BoardDTO> boardLists = dao.selectList(map);
+			List<FreeBoardDTO> boardLists = dao.selectList(map);
 			dao.close(); //DB연결해제
 			
 			//전달할 데이터를 request영역에 저장 후 List.jsp(View)로 포워드

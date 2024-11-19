@@ -8,7 +8,7 @@ public class MemberDAO extends DBConnPool{
 		MemberDTO dto = new MemberDTO();
 		/*
 		로그인폼에서 입력한 아이디, 패스워드를 통해 인파라미터를 설정할수 있도록 쿼리문을 작성*/
-		String query = "SELECT * FROM members WHERE username = ? AND password=?";
+		String query = "SELECT * FROM members WHERE userid = ? AND password=?";
 		
 		try {
 			//쿼리문 실행을 위한 prepared 인스턴스 생성
@@ -23,7 +23,7 @@ public class MemberDAO extends DBConnPool{
 			if(rs.next()) {
 				//회원정보가 있다면 DTO객체에 저장
 				dto.setId(rs.getString("id"));
-				dto.setUsername(rs.getString("username"));
+				dto.setUserid(rs.getString("userid"));
 				dto.setPassword(rs.getString("password"));
 				dto.setName(rs.getString("name"));
 				dto.setEmail(rs.getString("email"));
@@ -41,4 +41,36 @@ public class MemberDAO extends DBConnPool{
 		//회원정보를 저장한 DTO객체 반환
 		return dto;
 	}
+	
+    public boolean isUsernameTaken(String uid) {
+        String query = "SELECT COUNT(*) FROM members WHERE userid = ?";
+        try {
+        	psmt = con.prepareStatement(query);
+        	psmt.setString(1, uid);
+        	rs = psmt.executeQuery();
+        		
+        	if (rs.next()) {
+                	return rs.getInt(1) > 0;
+        		}
+    	} catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean registerMember(MemberDTO dto) {
+    	String query = "INSERT INTO members (id, userid, password, name, email) VALUES (member_seq.NEXTVAL, ?, ?, ?, ?)";
+    	try {
+    		psmt = con.prepareStatement(query);
+    		psmt.setString(1, dto.getUserid());
+    		psmt.setString(2, dto.getPassword());
+    		psmt.setString(3, dto.getName());
+    		psmt.setString(4, dto.getEmail());
+    		
+    		return psmt.executeUpdate() == 1;
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	return false;
+    }
 }

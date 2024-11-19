@@ -6,7 +6,7 @@ import java.util.Vector;
 
 import common.DBConnPool;
 
-public class BoardDAO extends DBConnPool{
+public class FreeBoardDAO extends DBConnPool{
 	
 	//게시물의 개수를 카운트하기 위한 메서드
 		public int selectCount(Map<String, Object> map) {
@@ -48,10 +48,10 @@ public class BoardDAO extends DBConnPool{
 		}
 		
 		//게시판 목록에 출력할 레코드를 인출하기 위한 메서드 정의
-		public List<BoardDTO> selectList(Map<String, Object>map){
+		public List<FreeBoardDTO> selectList(Map<String, Object>map){
 			//오라클에서 인출한 레코드를 저장하기 위한 List생성
 			//게시판은 순서를 지켜야하므로 set안되고 list로
-			List<BoardDTO> board = new Vector<BoardDTO>();
+			List<FreeBoardDTO> board = new Vector<FreeBoardDTO>();
 			
 			//레코드 인출을 위한 쿼리문 작성
 			String query = "SELECT * FROM board ";
@@ -72,7 +72,7 @@ public class BoardDAO extends DBConnPool{
 				//ResultSet의 크기만큼(인출된 레코드 개수만큼) 반복하여 setter로 DTO에 저장
 				while(rs.next()) {
 					//하나의 레코드를 저장하기 위해 DTO인스턴스 생성
-					BoardDTO dto = new BoardDTO();
+					FreeBoardDTO dto = new FreeBoardDTO();
 					System.out.println("가져옴");
 					
 					/*

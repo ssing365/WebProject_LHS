@@ -27,3 +27,25 @@
 	margin-right:auto;
 	margin-left:30px;
 }
+
+.error{
+	color: orangered;
+    font: caption;
+    font-weight: bold;    
+    padding: 10px;
+    background: whitesmoke;
+    border-radius: 10px;
+    width:270px;
+}
+.success{
+	color: darkgreen;
+    font: caption;
+    font-weight: bold;
+    padding: 10px;
+    background: whitesmoke;
+    border-radius: 10px;
+}
+
+#userPwdCheckMessage{
+	padding-left: 20px;
+}

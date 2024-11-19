@@ -41,9 +41,8 @@
                             <div class="col-lg-6">
                                 <div class="p-5">
                                     <div class="text-center">
-                                        <h1 class="h4 text-gray-900 mb-2">Forgot Your Password?</h1>
-                                        <p class="mb-4">We get it, stuff happens. Just enter your email address below
-                                            and we'll send you a link to reset your password!</p>
+                                        <h1 class="h4 text-gray-900 mb-2">비밀번호를 잊으셨나요?</h1>
+                                        <p class="mb-4">아래 이메일을 입력해주시면 비밀번호를 초기화할 링크를 전송해드립니다.</p>
                                     </div>
                                     <form class="user">
                                         <div class="form-group">
@@ -52,15 +51,15 @@
                                                 placeholder="Enter Email Address...">
                                         </div>
                                         <a href="login.kosmo" class="btn btn-primary btn-user btn-block">
-                                            Reset Password
+                                            비밀번호 초기화하기
                                         </a>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="register.kosmo">Create an Account!</a>
+                                        <a class="small" href="/WebProject_LHS/register.jsp">계정이 없으신가요? 회원가입하기</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="login.kosmo">Already have an account? Login!</a>
+                                        <a class="small" href="/WebProject_LHS/login.jsp">계정이 이미 있으신가요? 로그인하기</a>
                                     </div>
                                 </div>
                             </div>

@@ -118,9 +118,9 @@
 		//로그아웃 상태
 		%>
 	<div id="unloggedBtns">
-                            	<a href="login.kosmo" id="loginBtn" role="button">로그인</a>
-                           	 	<a href="register.kosmo" id="registerBtn" role="button">회원가입</a>
-							</div>
+     	<a href="/WebProject_LHS/login.jsp" id="loginBtn" role="button">로그인</a>
+ 		<a href="/WebProject_LHS/register.jsp" id="registerBtn" role="button">회원가입</a>
+	</div>
 	
 	<%
 	} else{ 
@@ -230,9 +230,6 @@
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
-                        </div>
                         <div class="card-body">
                             <div class="table-responsive">
                         			<button>글쓰기</button>

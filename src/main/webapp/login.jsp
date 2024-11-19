@@ -1,11 +1,20 @@
+<%@ page import="utils.CookieManager"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+//페이지에 진입하면 loginId라는 쿠키가 있는지 확인한다.
+String loginId = CookieManager.readCookie(request, "loginId");
 
+//이미 생성된 쿠키가 있다면 체크박스가 체크된 상태로 페이지를 로드한다.
+String cookieCheck = "";
+if (!loginId.equals("")) {
+	//이를 위해 checked 속성값을 추가한다.
+	cookieCheck = "checked";
+}
+%>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -46,15 +55,15 @@ if (session.getAttribute("UserId") != null) {
 		*/
 		if(!form.user_id.value){
 			//입력된 값이 없다면 경고창을 띄우고..
-			alert("아이디를 입력하세요.");
+			alert("아이디를 입력해주세요.");
 			//입력을 위해 포커스를 이동하고..
 			form.user_id.focus();
 			//submit이벤트핸들러쪽으로 false를 반환한다. -> 서버로 전송은 취소(중단)된다.
 			return false;
 		}
 		if(form.user_pw.value == ""){
-			alert("패스워드를 입력하세요.");
-			form.user_pw.focus(); //포커스 이동 개좋은데
+			alert("비밀번호를 입력해주세요.");
+			form.user_pw.focus(); 
 			return false;
 		}
 		
@@ -88,27 +97,27 @@ if (session.getAttribute("UserId") != null) {
                                     <form class="user" action="loginProcess.jsp" method="post" onsubmit="return validateForm(this);">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user"
-                                                id="exampleInputEmail" name="user_id" placeholder="아이디">
+                                                name="user_id" value="<%=loginId%>" placeholder="아이디" >
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" name="user_pw" placeholder="비밀번호">
+                                                name="user_pw" placeholder="비밀번호" >
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
-                                                <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">아이디저장</label>
+                                                <input type="checkbox" class="custom-control-input" id="customCheck"
+                                                	value="Y" name="save_check" <%=cookieCheck%>>
+                                                <label class="custom-control-label" for="customCheck">아이디 저장</label>
                                             </div>
                                         </div>
                                         <input type="submit" class="btn btn-primary btn-user btn-block" value="로그인">
-                                        </input>
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.kosmo">비밀번호를 잊으셨나요?</a>
+                                        <a class="small" href="forgot-password.jsp">비밀번호를 잊으셨나요?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="register.kosmo">계정이 없으신가요? 회원가입하기</a>
+                                        <a class="small" href="register.jsp">계정이 없으신가요? 회원가입하기</a>
                                     </div>
                                 </div>
                             </div>

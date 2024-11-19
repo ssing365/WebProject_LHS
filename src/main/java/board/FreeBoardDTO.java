@@ -1,6 +1,6 @@
 package board;
 
-public class BoardDTO {
+public class FreeBoardDTO {
 
 	private String id;
 	private String member_id;

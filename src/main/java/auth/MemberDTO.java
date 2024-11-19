@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class MemberDTO {
 	private String id;
-	private String username;
+	private String userid;
 	private String password;
 	private String name;
 	private String email;
@@ -21,11 +21,11 @@ public class MemberDTO {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public String getUsername() {
-		return username;
+	public String getUserid() {
+		return userid;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUserid(String userid) {
+		this.userid = userid;
 	}
 	public String getPassword() {
 		return password;

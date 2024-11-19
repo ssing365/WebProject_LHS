@@ -4,7 +4,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,6 +21,9 @@
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    
+    <!-- my style -->
+    <link href="css/style.css" rel="stylesheet">
 
 </head>
 
@@ -33,48 +35,75 @@
             <div class="card-body p-0">
                 <!-- Nested Row within Card Body -->
                 <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image">
+                    <%=request.getAttribute("RegisterErrMsg") == null ? 
+											"" : request.getAttribute("RegisterErrMsg")%>
+                    </div>
                     <div class="col-lg-7">
                         <div class="p-5">
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">Welcome to Spoiler Page!</h1>
                             </div>
-                            <form class="user">
+                            <form class="user" action="register.kosmo" method="post" onsubmit="return validateForm(this);">
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
-                                        <input type="text" class="form-control form-control-user" id="exampleFirstName"
-                                            placeholder="아이디">
-                                        <button>중복확인</button>
+                                    <div>아이디</div>
+                                        <input type="text" class="form-control form-control-user" 
+                                        	 name="user_id" id="inputUserId"
+                                             minlength="6" maxlength="20" required 
+                                             oninput="debounceCheckUserId()">
+                                        
                                     </div>
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control form-control-user" id="exampleLastName"
-                                            placeholder="닉네임">
-                                    </div>
+                                    <div class="col-sm-6" id="userIdCheckMessage"></div>
                                 </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="이메일">
-                                </div>
+                                
                                 <div class="form-group row">
                                     <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div>비밀번호</div>
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="비밀번호">
+                                            name="user_pw" id="inputPassword"
+                                            minlength="8" maxlength="20" required>
                                     </div>
                                     <div class="col-sm-6">
+                                    <div>비밀번호 재입력</div>
                                         <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="비밀번호 재입력">
+                                            name="user_pw_confirm" id="inputRepeatPassword"
+                                            minlength="8" maxlength="20" required 
+                                            oninput="checkUserPwd()">
                                     </div>
+                                    <div id="userPwdCheckMessage"></div>
                                 </div>
-                                <a href="login.kosmo" class="btn btn-primary btn-user btn-block">
-                                    회원가입
-                                </a>
+                                
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div>이메일</div>
+                                        <input type="text" class="form-control form-control-user"
+                                            name="user_email" id="inputEmail" 
+                                            required
+                                            oninput="checkUserEmail()">
+                                    </div>
+                                    <div class="col-sm-6" id="userEmailCheckMessage"></div>
+                                </div>
+                                
+                                <div class="form-group row">
+                                    <div class="col-sm-6 mb-3 mb-sm-0">
+                                    <div>닉네임</div>
+                                        <input type="text" class="form-control form-control-user"
+                                            name="user_name" id="inputUserName"
+                                            minlength="4" maxlength="20" required
+                                            oninput="checkUserName()">
+                                    </div>
+                                    <div class="col-sm-6" id="userNameCheckMessage"></div>
+                                </div>
+                                
+                                <input type="submit" class="btn btn-primary btn-user btn-block" value="회원가입">
                             </form>
                             <hr>
                             <div class="text-center">
                                 <a class="small" href="forgot-password.kosmo">비밀번호를 잊으셨나요?</a>
                             </div>
                             <div class="text-center">
-                                <a class="small" href="login.kosmo">계정이 이미 있으신가요? 로그인하기</a>
+                                <a class="small" href="/WebProject_LHS/login.jsp">계정이 이미 있으신가요? 로그인하기</a>
                             </div>
                         </div>
                     </div>
@@ -83,6 +112,9 @@
         </div>
 
     </div>
+    
+    <!-- 회원가입 조건 체크 -->	
+	<script src="js/registerCheck.js"></script>
     
     <!-- Font Awesome  -->
     <script src="https://kit.fontawesome.com/d1e91e0615.js" crossorigin="anonymous"></script>
