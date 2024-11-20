@@ -84,8 +84,6 @@ let debounceTimer;
 	    const userId = document.getElementById("inputUserId").value;
 	    const userPwd = document.getElementById("inputPassword").value;
 	    const userPwdConfirm = document.getElementById("inputRepeatPassword").value;
-	    const userEmail = document.getElementById("inputEmail").value;
-	    const userName = document.getElementById("inputUserName").value;
 
 	    // 아이디 검증
 	    const userIdCheckMessage = document.getElementById("userIdCheckMessage").innerHTML;

@@ -73,4 +73,48 @@ public class MemberDAO extends DBConnPool{
     	}
     	return false;
     }
+    
+    public boolean updateUser(MemberDTO dto) {
+    	String query = "update MEMBERS set name=?, "
+    			+ " bio=?, email=?, phone=?, address=? "
+    			+ " where userid = ?";
+    	try {
+    		psmt = con.prepareStatement(query);
+    		psmt.setString(1, dto.getName());
+    		psmt.setString(2, dto.getBio());
+    		psmt.setString(3, dto.getEmail());
+    		psmt.setString(4, dto.getPhone());
+    		psmt.setString(5, dto.getAddress());
+    		psmt.setString(6, dto.getUserid());
+    		
+    		return psmt.executeUpdate() > 0;
+    	} catch (Exception e) {
+    		e.printStackTrace();
+    	}
+    	return false;
+    }
+    
+    public MemberDTO getUserById(String userId) {
+    	MemberDTO user = null;
+    	String query = "SELECT * FROM members WHERE userid = ?";
+    	try {
+    		psmt = con.prepareStatement(query);
+    		psmt.setString(1, userId);
+    		rs = psmt.executeQuery();
+        
+	        if (rs.next()) {
+	            // DB에서 가져온 값을 MemberDTO 객체에 설정
+	            user = new MemberDTO();
+	            user.setUserid(rs.getString("userid"));
+	            user.setName(rs.getString("name"));
+	            user.setBio(rs.getString("bio"));
+	            user.setEmail(rs.getString("email"));
+	            user.setPhone(rs.getString("phone"));
+	            user.setAddress(rs.getString("address"));
+	        	}
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	    return user;
+	    }
 }

@@ -1,0 +1,136 @@
+@charset "UTF-8";
+
+body {
+	font-family: Arial, sans-serif;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+	margin: 0;
+	background-color: #f5f5f5;
+}
+
+.container {
+	width: 500px;
+	padding: 100px 20px;
+	background-color: white;
+	border-radius: 10px;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	text-align: center;
+}
+
+.profile-image {
+	width: 250px;
+	height: 250px;
+	border-radius: 50%;
+	background-size: cover;
+	background-position: center;
+	margin: 0 auto 15px;
+	cursor: pointer;
+}
+
+#name {
+	font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 8px;
+}
+#inputUserName{
+	font-size: 1.2rem;
+    padding: 10px;
+    border: 0px;
+    width: 50%;
+    text-align: center;
+    border-bottom: 2px solid;
+    margin-bottom: 15px;
+}
+
+#userid {
+	font-size: 1.1em;
+	color: #888;
+	margin-bottom: 10px;
+}
+
+#bio {
+	font-size: 1.0em;
+	margin-bottom: 15px;
+}
+#edit-bio{
+	width: 250px;
+    height: 100px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    padding: 7px;
+}
+
+#infoDiv{
+	margin-bottom: 5px;
+}
+
+#info {
+	font-size: 1.0em;
+	color: #555;
+}
+#edit-info{
+	width: 225px;
+    height: 10px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    padding: 10px 20px
+}
+
+#inputEmail{
+	width: 225px;
+    height: 10px;
+    border: 1px solid gray;
+    border-radius: 8px;
+    padding: 10px 20px
+}
+.error{
+	color: orangered;
+    font: caption;
+    font-weight: bold;
+    padding: 10px;
+    background: whitesmoke;
+    border-radius: 10px;
+    width: 50%;
+    margin-left: 115px;
+    margin-top: 5px;
+}
+.success{
+	color: darkgreen;
+    font: caption;
+    font-weight: bold;
+    padding: 10px;
+    background: whitesmoke;
+    border-radius: 10px;
+    width: 50%;
+    margin-left: 115px;
+    margin-top: 5px;
+}
+.editDiv{
+	color: dimgray;
+    font-weight: bold;
+    width: 55%;
+}
+
+.edit-btn {
+	width: 25%;
+    padding: 10px;
+    background-color: #EFF2F5;
+    color: #25292E;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-top: 20px;
+}
+
+.edit-btn:hover {
+	background-color: #EAEDF0;
+}
+
+.edit-field {
+    display: none;
+    margin-bottom: 10px;
+}
+

@@ -5,86 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>마이페이지 - Spoiler Page</title>
-<style>
-body {
-	font-family: Arial, sans-serif;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	min-height: 100vh;
-	margin: 0;
-	background-color: #f5f5f5;
-}
-
-.container {
-	width: 500px;
-	padding: 100px 20px;
-	background-color: white;
-	border-radius: 10px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	text-align: center;
-}
-
-.profile-image {
-	width: 250px;
-	height: 250px;
-	border-radius: 50%;
-	background-size: cover;
-	background-position: center;
-	margin: 0 auto 15px;
-	cursor: pointer;
-}
-
-#name {
-	font-size: 1.5em;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-#userid {
-	font-size: 1.1em;
-	color: #888;
-	margin-bottom: 10px;
-}
-
-#bio {
-	font-size: 1.0em;
-	margin-bottom: 15px;
-}
-
-#infoDiv{
-	margin-bottom: 5px;
-}
-
-#info {
-	font-size: 1.0em;
-	color: #555;
-}
-
-.edit-btn {
-	width: 25%;
-    padding: 10px;
-    background-color: #EFF2F5;
-    color: #25292E;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 0.9em;
-    margin-top: 20px;
-}
-
-.edit-btn:hover {
-	background-color: #EAEDF0;
-}
-
-.edit-field {
-    display: none;
-    margin-bottom: 8px;
-}
-
-</style>
+<link rel="stylesheet" href="css/myPage.css" />
 </head>
 <body>
+<button><a href="index.kosmo">홈으로</a></button>
 	<div class="container">
 		<!-- 프로필 이미지 -->
 		<div class="profile-image"
@@ -98,74 +22,81 @@ body {
 					</c:choose>"
              onclick="location.href='프로필 변경 URL 또는 컨트롤러'">
 		</div>
-
-		<!-- 닉네임 -->
-		<div class="view-field" id="name">${UserName}</div>
-        <div class="edit-field">
-            <input type="text" id="edit-name" value="${UserName}" />
-        </div>
-
-		<!-- 회원아이디 -->
-		<div class="view-field" id="userid">${UserId}</div>
-
-		<!-- Bio (내용 없을 경우 표시하지 않음) -->
-		<c:if test="${not empty Bio}">
-			<div class="view-field" id="bio">${Bio}</div>
-		</c:if>
-		<div class="edit-field">
-            <input type="text" id="edit-bio" value="${Bio}" />
-        </div>
-
-		<!-- 이메일, 전화번호, 주소 (각 항목 내용이 없으면 표시하지 않음) -->
-		<c:if test="${not empty Email}">
-			<div class="view-field" id="infoDiv">
-				<span>이메일:</span> <span id="info"> ${Email}</span>
-			</div>
-		</c:if>
-			<div class="edit-field">
-	            <input type="text" id="edit-email" value="${Email}" />
+		
+		<form id="profileForm"
+		 action="updateUser.kosmo" method="post" onsubmit="return validateForm(this);">
+			<!-- 닉네임 -->
+			<div class="view-field" id="name">${user.name}</div>
+	        <div class="edit-field">
+	            <input type="text" value="${user.name}"
+	            	name="user_name" id="inputUserName"
+	                minlength="4" maxlength="20" required
+	                oninput="checkUserName()" />
+	            <div id="userNameCheckMessage"></div>
 	        </div>
-	        
-		<c:if test="${not empty Phone}">
-			<div class="view-field" id="infoDiv">
-				<span>전화번호:</span> <span id="info"> ${Phone}</span>
+	
+			<!-- 회원아이디 -->
+			<div class="view-field" id="userid">${user.userid}</div>
+			<div>
+				<input style="display:none" type="text" name="user_id" value="${user.userid}"/>
 			</div>
-		</c:if>
+	
+			<!-- Bio (내용 없을 경우 표시하지 않음) -->
+			<c:if test="${not empty user.bio}">
+				<div class="view-field" id="bio">${user.bio}</div>
+			</c:if>
 			<div class="edit-field">
-	            <input type="text" id="edit-phone" value="${Phone}" />
+				<div class="editDiv">소개</div>
+	            <textarea name="bio" rows="4" id="edit-bio">${user.bio}</textarea>
 	        </div>
-	        
-		<c:if test="${not empty Address}">
-			<div class="view-field" id="infoDiv">
-				<span>주소:</span> <span id="info"> ${Address}</span>
-			</div>
-		</c:if>
-			<div class="edit-field">
-	            <input type="text" id="edit-address" value="${Address}" />
-	        </div>
+	
+			<!-- 이메일, 전화번호, 주소 (각 항목 내용이 없으면 표시하지 않음) -->
+			<c:if test="${not empty user.email}">
+				<div class="view-field" id="infoDiv">
+					<span>이메일:</span> <span id="info"> ${user.email}</span>
+				</div>
+			</c:if>
+				<div class="edit-field">
+					<div class="editDiv">이메일</div>
+		            <input type="text" value="${user.email}" 
+		            	name="email" id="inputEmail"
+		            	required 
+		            	oninput="checkUserEmail()"/>
+		            <div id="userEmailCheckMessage"></div>
+		        </div>
+		        
+			<c:if test="${not empty user.phone}">
+				<div class="view-field" id="infoDiv">
+					<span>연락처:</span> <span id="info"> ${user.phone}</span>
+				</div>
+			</c:if>
+				<div class="edit-field">
+					<div class="editDiv">연락처</div>
+		            <input name="phone" type="text" id="edit-info" value="${Phone}" />
+		        </div>
+		        
+			<c:if test="${not empty Address}">
+				<div class="view-field" id="infoDiv">
+					<span>주소:</span> <span id="info"> ${user.address}</span>
+				</div>
+			</c:if>
+				<div class="edit-field">
+					<div class="editDiv">주소</div>
+		            <input name="address" type="text" id="edit-info" value="${Address}" />
+		        </div>
 
+		</form>
 		<!-- 정보 수정 버튼 -->
-		<div>
-		<button class="edit-btn" id="edit-btn" onclick="toggleEditMode()">
-			정보수정</button>
-		<button class="save-btn" id="save-btn" style="display:none;" onclick="saveProfile()">
-			저장</button>
-		</div>
+			<div>
+			<button class="edit-btn" id="edit-btn" onclick="toggleEditMode()">
+				정보수정</button>
+			<button class="edit-btn" id="save-btn" style="display:none;" onclick="saveProfile()">
+				저장</button>
+			<button class="edit-btn" id="cancel-btn" style="display:none;" onclick="toggleViewMode()">
+				취소</button>
+			</div>
 	</div>
 </body>
-<script>
-function toggleEditMode() {
-    const viewFields = document.querySelectorAll('.view-field');
-    const editFields = document.querySelectorAll('.edit-field');
-    const editButton = document.getElementById('edit-btn');
-    const saveButton = document.getElementById('save-btn');
 
- 	// view-field는 숨기고 edit-field는 보이게 설정
-    viewFields.forEach(field => field.style.display = 'none');
-    editFields.forEach(field => field.style.display = 'block');
-
-    editButton.style.display = editButton.style.display === 'none' ? 'inline-block' : 'none';
-    saveButton.style.display = saveButton.style.display === 'none' ? 'inline-block' : 'none';
-}
-</script>
+<script src="js/myPage.js"></script>
 </html>

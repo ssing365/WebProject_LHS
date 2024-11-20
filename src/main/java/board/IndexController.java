@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import auth.MemberDAO;
+import auth.MemberDTO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -19,6 +21,10 @@ public class IndexController extends HttpServlet{
 		@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
 				throws ServletException, IOException {
+			String userId = (String) req.getSession().getAttribute("UserId");
+			MemberDAO memberDAO = new MemberDAO();
+			MemberDTO user = memberDAO.getUserById(userId);
+			req.getSession().setAttribute("user", user);
 			
 			//DAO 인스턴스 생성. 생성과 동시에 DBCP를 통해 오라클에 연결된다.
 			FreeBoardDAO dao = new FreeBoardDAO();
