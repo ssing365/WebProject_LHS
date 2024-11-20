@@ -43,7 +43,7 @@ let debounceTimer;
 
 	    // 입력값이 정규식에 맞는지 체크
 	    if (!pwdRegex.test(userPwd)) {
-	    	userPwdCheckMessage.innerHTML = "<div class='error'><br>비밀번호는 8~20자 사이의 영문과 숫자만 사용할 수 있습니다.</div>";
+	    	userPwdCheckMessage.innerHTML = "<span class='error'><br>비밀번호는 8~20자 사이의 영문과 숫자만 사용할 수 있습니다.</span>";
 	        return;
 	    }
 	    

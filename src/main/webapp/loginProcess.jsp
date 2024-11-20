@@ -27,8 +27,14 @@ if (memberDTO.getId() != null) {
 	}
 	
 	//세션 영역에 아이디와 이름을 저장한다.
-	session.setAttribute("UserId", memberDTO.getId());
+	session.setAttribute("UserId", memberDTO.getUserid());
 	session.setAttribute("UserName", memberDTO.getName());
+	session.setAttribute("Bio", memberDTO.getBio());
+	session.setAttribute("Email", memberDTO.getEmail());
+	session.setAttribute("Phone", memberDTO.getPhone());
+	session.setAttribute("Address", memberDTO.getAddress());
+	session.setAttribute("ProfileImage", memberDTO.getProfile_image());
+	
 	/*세션 영역에 저장된 속성값은 페이지를 이동하더라도 유지되므로 로그인페이지로 이동
 	그리고 웹브라우저를 완전히 닫을때까지 저장된 정보는 유지된다.*/
 	response.sendRedirect("index.kosmo");
