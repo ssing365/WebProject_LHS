@@ -32,10 +32,13 @@ if (!loginId.equals("")) {
 
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/style.css" />
 
 </head>
 
 <body class="bg-gradient-primary">
+<button id="homeBtn" onclick ="location.href='index.kosmo'">홈으로</button>
 <% 
 if (session.getAttribute("UserId") != null) {
     response.sendRedirect("index.kosmo");

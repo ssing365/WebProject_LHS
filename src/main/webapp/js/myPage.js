@@ -47,9 +47,9 @@ function checkUserName() {
 	const inputUserName = document.getElementById("inputUserName").value;
 	const userNameCheckMessage = document.getElementById("userNameCheckMessage");
 
-	const nameRegex = /^[a-zA-Z가-힣0-9]{4,20}$/;
+	const nameRegex = /^[a-zA-Z가-힣0-9]{2,16}$/;
 	if (!nameRegex.test(inputUserName)) {
-		userNameCheckMessage.innerHTML = "<div class='error'>4~20자 사이의 영문, 한글, 숫자만 입력 가능합니다.</div>";
+		userNameCheckMessage.innerHTML = "<div class='error'>2~16자 사이의 영문, 한글, 숫자만 입력 가능합니다.</div>";
 	} else {
 		userNameCheckMessage.innerHTML = "<div class='success'>사용 가능한 닉네임입니다.</div>"
 	}

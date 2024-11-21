@@ -21,11 +21,13 @@ public class IndexController extends HttpServlet{
 		@Override
 		protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
 				throws ServletException, IOException {
+			/* 우측 상단 회원 정보 출력용*/
 			String userId = (String) req.getSession().getAttribute("UserId");
 			MemberDAO memberDAO = new MemberDAO();
 			MemberDTO user = memberDAO.getUserById(userId);
 			req.getSession().setAttribute("user", user);
 			
+			/* 게시판 출력용 */
 			//DAO 인스턴스 생성. 생성과 동시에 DBCP를 통해 오라클에 연결된다.
 			FreeBoardDAO dao = new FreeBoardDAO();
 			

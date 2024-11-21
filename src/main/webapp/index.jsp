@@ -193,7 +193,7 @@
 												img/profile/${ProfileImage}
 											</c:when>
 											<c:otherwise>
-												img/profile/default_profile.jpg
+												img/undraw_profile.svg
 											</c:otherwise>
 										</c:choose>">
                             </a>
@@ -203,10 +203,6 @@
                                 <a class="dropdown-item" href="myPage.kosmo">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     마이페이지
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    정보 수정
                                 </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
@@ -234,7 +230,10 @@
                     <div class="card shadow mb-4">
                         <div class="card-body">
                             <div class="table-responsive">
-                        			<button>글쓰기</button>
+                        			<button
+                        				id = "writeBtn"
+                        				onclick="location.href='write.kosmo'">
+                        				글쓰기</button>
                                 <table class="table table-bordered" id="dataTable" width="90%" cellspacing="0">
                                     <thead>
                                         <tr>
@@ -258,13 +257,15 @@
 												<!-- 게시물의 개수를 저장한 totalCount에서 인출되는 인스턴스의
 												인덱스를 차감해 순차적인 번호를 출력  -->
 												<td>${map.totalCount - loop.index }</td>
-												<td> ${row.title }
+												<td> 
 													<!-- 제목 클릭 시 열람 페이지로 이동해야하므로 
-													게시물의 일련번호를 파라미터로 전달한다. <a
-													href="../mvcboard/view.do?idx=${row.id }"></a>--></td>
+													게시물의 일련번호를 파라미터로 전달한다.--> 
+													<a href="/WebProject_LHS/view.kosmo?id=${row.id }">${row.title }
+													</a>
+												</td>
 												<!-- 현재 루프에서 row는 MVCBoardDTO를 의미하므로
 												각 멤버변수의 getter를 통해 저장된 값을 출력한다.  -->
-												<td>${row.member_id }</td>
+												<td>${row.name }</td>
 												<td>${row.views }</td>
 												<td>${row.postdate }</td>
 											</tr>

@@ -10,6 +10,16 @@ public class FreeBoardDTO {
 	private int views;
 	private int likes;
 	private java.sql.Date postdate;
+	private String name;
+	private int idx;
+	
+	public int getIdx() {
+		return idx;
+	}
+	public void setIdx(int idx) {
+		this.idx = idx;
+	}
+	
 	public String getId() {
 		return id;
 	}
@@ -57,6 +67,12 @@ public class FreeBoardDTO {
 	}
 	public void setPostdate(java.sql.Date postdate) {
 		this.postdate = postdate;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 	

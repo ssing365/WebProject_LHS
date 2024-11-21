@@ -49,3 +49,18 @@
 #userPwdCheckMessage{
 	padding-left: 20px;
 }
+
+#homeBtn{
+	position: fixed;
+    top: 10px;
+    left: 10px;
+    padding: 15px;
+    font-size: large;
+    border: none;
+    background-color: #F5F5F5;
+    color: #C14C3D;
+    border-radius: 10%;
+}
+#homeBtn:hover {
+	background-color: #E6E6E6;
+}

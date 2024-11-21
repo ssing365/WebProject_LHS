@@ -90,7 +90,7 @@
                                     <div>닉네임</div>
                                         <input type="text" class="form-control form-control-user"
                                             name="user_name" id="inputUserName"
-                                            minlength="4" maxlength="20" required
+                                            minlength="2" maxlength="16" required
                                             oninput="checkUserName()">
                                     </div>
                                     <div class="col-sm-6" id="userNameCheckMessage"></div>

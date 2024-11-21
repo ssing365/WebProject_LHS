@@ -30,13 +30,6 @@ public class FreeBoardDAO extends DBConnPool{
 				stmt = con.createStatement();
 				//쿼리문을 실행한 후 결과를 ResultSet으로 반환받는다.
 				rs = stmt.executeQuery(query);
-				/*
-				 * count()함수는 조건에 상관없이 항상 결과가 인출되므로
-				 * if문같은 조건절없이 바로 next함수를 실행할 수 있다.
-				 * 결과가 인출되지 않는(select)함수 즉 null이 반환되는 함수에서 
-				 * next를 바로 실행하면 nullpointerexception이 떨어지므로
-				 * while(rs.next())이나 if(rs.next())처럼 조건절을 함께 써야한다. 
-				 */
 				rs.next();
 				totalCount = rs.getInt(1);
 			}
@@ -54,14 +47,15 @@ public class FreeBoardDAO extends DBConnPool{
 			List<FreeBoardDTO> board = new Vector<FreeBoardDTO>();
 			
 			//레코드 인출을 위한 쿼리문 작성
-			String query = "SELECT * FROM board ";
+			String query = "SELECT Bo.*, Me.name FROM board Bo "
+					+ " inner join members Me on Bo.member_id = Me.userid";
 			//검색어 입력 여부에 따라 where절은 조건부로 추가됨
 			if(map.get("searchWord")!=null) {
 				query += " WHERE " + map.get("searchField")
 				+" LIKE '%" + map.get("searchWord") + "%' ";
 			}
 			//일련번호의 내림차순으로 정렬한 후 인출한다.
-			query += " ORDER BY id DESC";
+			query += " ORDER BY Bo.id DESC";
 			//게시판은 항상 최근에 작성한 게시물이 상단에 노출되어야한다.
 			
 			try {
@@ -73,13 +67,7 @@ public class FreeBoardDAO extends DBConnPool{
 				while(rs.next()) {
 					//하나의 레코드를 저장하기 위해 DTO인스턴스 생성
 					FreeBoardDTO dto = new FreeBoardDTO();
-					System.out.println("가져옴");
 					
-					/*
-					 * ResultSet 인스턴스에서 데이터를 추출할 때 멤버변수의 타입에 따라
-					 * getString(), getInt(), getDate()로 구분하여 호출한다.
-					 * 이 데이터를 DTO의 setter를 이용해 저장한다.
-					 */
 					dto.setId(rs.getString(1));
 					dto.setMember_id(rs.getString(2));
 					dto.setCategory(rs.getString(3));
@@ -88,6 +76,7 @@ public class FreeBoardDAO extends DBConnPool{
 					dto.setViews(rs.getInt(6));
 					dto.setLikes(rs.getInt(7));
 					dto.setPostdate(rs.getDate(8));
+					dto.setName(rs.getString("NAME"));
 					
 					//레코드가 저장된 DTO를 List에 개수만큼 추가한다.
 					board.add(dto);
@@ -100,5 +89,120 @@ public class FreeBoardDAO extends DBConnPool{
 			//마지막으로 인출한 레코드를 저장한 List를 반환한다.
 			return board;
 		}
-
+		
+		//조회수 증가 메서드
+		public void updateViews(String id) {
+			String query = "UPDATE board SET "
+					+ " views=views+1 "
+					+ " WHERE id = ? ";
+			
+			try {
+				psmt = con.prepareStatement(query);
+				psmt.setString(1, id);
+				psmt.executeQuery();
+			} catch (Exception e) {
+				System.out.println("게시물 조회수 증가 중 예외 발생");
+				e.printStackTrace();
+			}
+		}
+		
+		//게시물 열람 메서드
+		public FreeBoardDTO selectView(String id) {
+			//인출한 레코드를 저장하기 위해 DTO 생성
+			FreeBoardDTO dto = new FreeBoardDTO();
+			//내부조인을 이용해 쿼리문 작성. member테이블의 name컬럼까지 포함.
+			String query = " SELECT Bo.*, Me.name FROM board Bo "
+					+ " INNER JOIN members Me ON Bo.member_id=Me.userid "
+					+ " WHERE Bo.id=? "; 
+			try {
+				psmt = con.prepareStatement(query);//쿼리문 준비
+				psmt.setString(1, id); //인파라미터 설정
+				rs = psmt.executeQuery(); //쿼리문 실행
+				
+				//하나의 게시물을 인출하므로 if문으로 조건에 맞는 게시물이 있는지 확인
+				if(rs.next()) {
+					//결과를 DTO객체에 저장
+					dto.setId(rs.getString("ID"));
+					dto.setMember_id(rs.getString("MEMBER_ID"));
+					dto.setCategory(rs.getString("CATEGORY"));
+					dto.setTitle(rs.getString("TITLE"));
+					dto.setContent(rs.getString("CONTENT"));
+					dto.setViews(rs.getInt("VIEWS"));
+					dto.setLikes(rs.getInt("LIKES"));
+					dto.setPostdate(rs.getDate("CREATED_AT"));
+					dto.setName(rs.getString("NAME"));
+				}
+			}
+			catch(Exception e){
+				System.out.println("게시물 상세보기 중 예외 발생");
+				e.printStackTrace();
+			}
+			return dto;
+		}
+		
+		//글쓰기 처리를 위한 메서드
+		public int insertWrite(FreeBoardDTO dto) {
+			int result = 0;
+			try {
+				String query = 
+						"INSERT INTO Board ( "
+						+ " id, member_id, category, title, content) "
+						+ " VALUES ( "
+						+ " board_seq.NEXTVAL,?,?,?,?)";
+				//쿼리문을 인수로 preparedStatement 인스턴스 생성
+				psmt = con.prepareStatement(query);
+				
+				psmt.setString(1, dto.getMember_id());
+				psmt.setString(2, dto.getCategory());
+				psmt.setString(3, dto.getTitle());
+				psmt.setString(4, dto.getContent());
+				result = psmt.executeUpdate();
+				
+			}catch(Exception e) {
+				System.out.println(" 게시물 입력 중 예외 발생 ");
+				e.printStackTrace();
+			}
+			return result;
+		}
+		
+		//지정한 일련번호의 게시물을 삭제한다.
+		public int deletePost(String id) {
+			int result = 0;
+			try {
+				String query = "delete from board where id = ?";
+				psmt = con.prepareStatement(query);
+				psmt.setString(1, id);
+				result = psmt.executeUpdate();
+				
+			} catch (Exception e) {
+				System.out.println("게시물 삭제 중 예외 발생");
+				e.printStackTrace();
+			}
+			return result;
+		}
+		
+		public int updatePost(FreeBoardDTO dto) {
+			int result = 0;
+			try {
+				//쿼리문 템플릿 준비
+				String query = "update board set title=?, "
+						+ " content=? "
+						+ " where id=? and member_id=?";
+					
+				//쿼리문 준비
+				psmt = con.prepareStatement(query);
+				psmt.setString(1, dto.getTitle());
+				psmt.setString(2, dto.getContent());
+				psmt.setString(3, dto.getId());
+				psmt.setString(4, dto.getMember_id());
+				
+				//쿼리문 실행
+				result = psmt.executeUpdate();
+			}
+			catch(Exception e) {
+				System.out.println("게시물 수정 중 예외 발생");
+				e.printStackTrace();
+			}
+			return result;
+		}
 }

@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="css/myPage.css" />
 </head>
 <body>
-<button><a href="index.kosmo">홈으로</a></button>
+<button id="homeBtn" onclick ="location.href='index.kosmo'">홈으로</button>
 	<div class="container">
 		<!-- 프로필 이미지 -->
 		<div class="profile-image"
@@ -17,7 +17,7 @@
 							background-image:url('img/profile/${ProfileImage}');
 						</c:when>
 						<c:otherwise>
-							background-image:url('img/profile/default_profile.jpg');
+							background-image:url('img/undraw_profile.svg');
 						</c:otherwise>
 					</c:choose>"
              onclick="location.href='프로필 변경 URL 또는 컨트롤러'">
@@ -72,7 +72,7 @@
 			</c:if>
 				<div class="edit-field">
 					<div class="editDiv">연락처</div>
-		            <input name="phone" type="text" id="edit-info" value="${Phone}" />
+		            <input name="phone" type="text" id="edit-info" value="${user.phone}" />
 		        </div>
 		        
 			<c:if test="${not empty Address}">
@@ -82,7 +82,7 @@
 			</c:if>
 				<div class="edit-field">
 					<div class="editDiv">주소</div>
-		            <input name="address" type="text" id="edit-info" value="${Address}" />
+		            <input name="address" type="text" id="edit-info" value="${user.address}" />
 		        </div>
 
 		</form>

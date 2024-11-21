@@ -42,11 +42,27 @@ public class MemberDAO extends DBConnPool{
 		return dto;
 	}
 	
-    public boolean isUsernameTaken(String uid) {
+    public boolean isUserIdTaken(String uid) {
         String query = "SELECT COUNT(*) FROM members WHERE userid = ?";
         try {
         	psmt = con.prepareStatement(query);
         	psmt.setString(1, uid);
+        	rs = psmt.executeQuery();
+        		
+        	if (rs.next()) {
+                	return rs.getInt(1) > 0;
+        		}
+    	} catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean isUserNameTaken(String uName) {
+        String query = "SELECT COUNT(*) FROM members WHERE name = ?";
+        try {
+        	psmt = con.prepareStatement(query);
+        	psmt.setString(1, uName);
         	rs = psmt.executeQuery();
         		
         	if (rs.next()) {

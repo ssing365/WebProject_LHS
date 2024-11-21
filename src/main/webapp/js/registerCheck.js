@@ -69,25 +69,28 @@ let debounceTimer;
 	}
 	
 	function checkUserName() {
-        const inputUserName = document.getElementById("inputUserName").value;
+        const userName = document.getElementById("inputUserName").value;
         const userNameCheckMessage = document.getElementById("userNameCheckMessage");
 
-        const nameRegex = /^[a-zA-Z가-힣0-9]{4,20}$/;
-        if (!nameRegex.test(inputUserName)) {
-        	userNameCheckMessage.innerHTML= "<div class='error'><br>4~20자 사이의 영문, 한글, 숫자만 입력 가능합니다.</div>";
+        const nameRegex = /^[a-zA-Z가-힣0-9]{2,16}$/;
+        if (!nameRegex.test(userName)) {
+        	userNameCheckMessage.innerHTML= "<div class='error'><br>2~16자 사이의 영문, 한글, 숫자만 입력 가능합니다.</div>";
         } else {
         	userNameCheckMessage.innerHTML = "<div class='success'><br>사용 가능한 닉네임입니다.</div>"
         }
+		
+		
     }
 	
 	function validateForm(form) {
 	    const userId = document.getElementById("inputUserId").value;
 	    const userPwd = document.getElementById("inputPassword").value;
 	    const userPwdConfirm = document.getElementById("inputRepeatPassword").value;
+		const userName = document.getElementById("inputUserName").value;
 
 	    // 아이디 검증
 	    const userIdCheckMessage = document.getElementById("userIdCheckMessage").innerHTML;
-	    if (userIdCheckMessage.includes("아이디는 6~12자 사이의 영문과 숫자만 사용할 수 있습니다.") || userId.length < 6 || userId.length > 12) {
+	    if (userIdCheckMessage.includes("사용할 수 없는 아이디입니다.") || userId.length < 6 || userId.length > 12) {
 	        alert("아이디를 확인해주세요.");
 	        form.inputUserId.focus();
 	        return false;
@@ -118,7 +121,7 @@ let debounceTimer;
 
 	    // 닉네임 검증
 	    const userNameCheckMessage = document.getElementById("userNameCheckMessage").innerHTML;
-	    if (userNameCheckMessage.includes("4~20자 사이의 영문, 한글, 숫자만 입력 가능합니다.")) {
+	    if (userNameCheckMessage.includes("사용할 수 없는 닉네임입니다.")||userName>=2||userName<=16) {
 	        alert("닉네임을 확인해주세요.");
 	        form.inputUserName.focus();
 	        return false;
