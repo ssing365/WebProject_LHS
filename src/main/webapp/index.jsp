@@ -230,18 +230,15 @@
                     <div class="card shadow mb-4">
                         <div class="card-body">
                             <div class="table-responsive">
-                        			<button
-                        				id = "writeBtn"
-                        				onclick="location.href='write.kosmo'">
-                        				글쓰기</button>
+                        			
                                 <table class="table table-bordered" id="dataTable" width="90%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th width="5%">번호</th>
-                                            <th>제목</th>
-                                            <th>작성자</th>
-                                            <th>조회수</th>
-                                            <th>작성일</th>
+                                            <th width="10%">번호</th>
+                                            <th width="45%">제목</th>
+                                            <th width="20%">작성자</th>
+                                            <th width="10%">조회수</th>
+                                            <th width="15%">작성일</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -275,6 +272,11 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <button
+                   				id = "writeBtn"
+                   				onclick="location.href='write.kosmo'">
+                   				글쓰기
+                   			</button>
                         </div>
                     </div>
 

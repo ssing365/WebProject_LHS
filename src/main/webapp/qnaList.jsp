@@ -117,10 +117,10 @@
 	if (session.getAttribute("UserId") == null){ //로그인 상태 확인
 		//로그아웃 상태
 		%>
-	<div id="unloggedBtns">
-                            	<a href="login.kosmo" id="loginBtn" role="button">로그인</a>
-                           	 	<a href="register.kosmo" id="registerBtn" role="button">회원가입</a>
-							</div>
+			<div id="unloggedBtns">
+                   <a href="/WebProject_LHS/login.jsp" id="loginBtn" role="button">로그인</a>
+                   <a href="/WebProject_LHS/register.jsp" id="registerBtn" role="button">회원가입</a>
+			</div>
 	
 	<%
 	} else{ 
@@ -231,22 +231,21 @@
                     <div class="card shadow mb-4">
                         <div class="card-body">
                             <div class="table-responsive">
-                        			<button>글쓰기</button>
                                 <table class="table table-bordered" id="dataTable" width="90%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th width="5%">번호</th>
-                                            <th>제목</th>
-                                            <th>작성자</th>
-                                            <th>조회수</th>
-                                            <th>작성일</th>
+                                            <th width="10%">번호</th>
+                                            <th width="45%">제목</th>
+                                            <th width="20%">작성자</th>
+                                            <th width="10%">조회수</th>
+                                            <th width="15%">작성일</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                     <c:choose>
 									<c:when test="${ empty boardLists }">
 										<tr>
-											<td colspan="6" align="center">등록된 게시물이 없습니다^^*</td>
+											<td colspan="6" align="center">등록된 게시물이 없습니다:)</td>
 										</tr>
 									</c:when>
 									<c:otherwise>
@@ -271,6 +270,11 @@
                                     </tbody>
                                 </table>
                             </div>
+                            <button
+                   				id = "writeBtn"
+                   				onclick="location.href='write.kosmo'">
+                   				질문 남기기
+                   			</button>
                         </div>
                     </div>
 

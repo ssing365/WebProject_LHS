@@ -4,6 +4,14 @@
 	display: flex;
 }
 
+#writeBtn{
+	background: #4E73DF;
+    border: 0px;
+    padding: 5px 10px;
+    border-radius: 7px;
+    color: white;	
+}
+
 #loginBtn{
 	background-color: #DE4646;
     color: #FEF7FA;
