@@ -14,8 +14,4 @@
 - [BootStrap - SB Admin 2](https://startbootstrap.com/theme/sb-admin-2)
 
 
-### References
-- [Must Have 성낙현의 JSP 자바 웹 프로그래밍](https://product.kyobobook.co.kr/detail/S000208469948)
-
-
   
